@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using WebAPIForReact.Models;
 
 namespace WebAPIForReact.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
+    [EnableCors("ReactEndpoint")]
     public class ProjectController : ControllerBase
     {
         private static List<Project> projects = new List<Project>

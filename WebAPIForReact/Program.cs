@@ -9,6 +9,17 @@ namespace WebAPIForReact
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+
+            // Attiviamo CORS x React --------------------->
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("ReactEndPoint", builder =>
+                {
+                    builder.WithOrigins("http://localhost:5173/");
+                });
+            });
+                
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -24,6 +35,9 @@ namespace WebAPIForReact
 
             app.UseRouting();
 
+            // Cors x React -------------------->
+            app.UseCors();
+            // ----------------------------------
             app.UseAuthorization();
 
             app.MapControllerRoute(
