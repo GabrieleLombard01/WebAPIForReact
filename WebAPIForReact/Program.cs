@@ -15,7 +15,10 @@ namespace WebAPIForReact
             {
                 options.AddPolicy("ReactEndPoint", builder =>
                 {
-                    builder.WithOrigins("http://localhost:5173");
+                    //builder.WithOrigins("http://localhost:5173");
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
                 });
             });
             // ----------------------------------------------
