@@ -7,7 +7,7 @@ namespace WebAPIForReact.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [EnableCors("ReactEndPoint")]
-    public class ProjectController : ControllerBase
+    public class ProjectsController : ControllerBase
     {
         private static List<Project> projects = new List<Project>
         {
