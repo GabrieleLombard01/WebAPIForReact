@@ -20,5 +20,13 @@ namespace WebAPIForReact.Controllers
         {
             return projects;
         }
+
+        [HttpPost]
+        public Project PostProject([FromBody] Project project)
+        {
+            project.Id = projects.Count() + 1;
+            projects.Add(project);
+            return project;
+        }
     }
 }
