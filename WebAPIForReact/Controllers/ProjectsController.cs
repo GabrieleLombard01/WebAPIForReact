@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using WebAPIForReact.Models;
 
 namespace WebAPIForReact.Controllers
@@ -21,6 +22,7 @@ namespace WebAPIForReact.Controllers
             return projects;
         }
 
+        // ---------- VERBO PER CREATE ----------
         [HttpPost]
         public Project PostProject([FromBody] Project project)
         {
@@ -28,5 +30,41 @@ namespace WebAPIForReact.Controllers
             projects.Add(project);
             return project;
         }
+
+        // ---------- VERBI PER UPDATE ----------
+        [HttpGet("{Id}")]
+        public Project? GetProject(long Id) 
+        {
+            return projects.Find(p => p.Id == Id);
+        }
+
+
+        [HttpPut]
+        public IActionResult UpdateProject([FromBody] Project updatedProject)
+        {
+            Project existingProject = null;
+
+            foreach (var project in projects)
+            {
+                if (project.Id == updatedProject.Id)
+                {
+                    existingProject = project;
+                    break;
+                }
+            }
+
+            if (existingProject == null)
+            {
+                return NotFound(); // 404 - Not Found
+            }
+
+
+            return Ok(existingProject); // 200 - Ok
+        }
+
     }
+    // ------------------------------------------------------- 
+
+
 }
+
