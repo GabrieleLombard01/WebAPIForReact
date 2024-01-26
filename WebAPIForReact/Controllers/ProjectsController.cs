@@ -42,28 +42,41 @@ namespace WebAPIForReact.Controllers
         [HttpPut]
         public IActionResult UpdateProject([FromBody] Project updatedProject)
         {
-            Project existingProject = null;
 
             foreach (var project in projects)
             {
                 if (project.Id == updatedProject.Id)
                 {
-                    existingProject = project;
+                    project.Name = updatedProject.Name;
+                    project.Description = updatedProject.Description;
+                    return Ok();
                     break;
                 }
             }
 
-            if (existingProject == null)
+            return NotFound();
+            
+        }
+
+        // DELETE ---------------------------------------- 
+        [HttpDelete("{id}")]
+        public void DeleteProject(long id)
+        {
+            foreach (Project p in projects)
             {
-                return NotFound(); // 404 - Not Found
+                if (p.Id == id)
+                {
+                    projects.Remove(p);
+
+                    break;
+                }
             }
 
-
-            return Ok(existingProject); // 200 - Ok
         }
 
     }
-    // ------------------------------------------------------- 
+
+   
 
 
 }
